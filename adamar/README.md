@@ -31,7 +31,7 @@ Random vector initialization started...
 Random vector initialization is done.
 Quant transform started...
 Quant transform is done.
-Time elapsed: 0.000004
+Time elapsed: 0.000005
 
 Args:
         N: 2
@@ -44,21 +44,21 @@ State vector v:
         Quantum state vector len: 4
         Float complex size: 8
         Quantum state vector size: 32
-            0: (4.0000, 4.0000)
-            1: (2.0000, 4.0000)
-            2: (3.0000, 3.0000)
-            3: (4.0000, 3.0000)
+            0: (0.4104, 0.4104)
+            1: (0.2052, 0.4104)
+            2: (0.3078, 0.3078)
+            3: (0.4104, 0.3078)
 
 State vector w:
         Qubits num: 2
         Quantum state vector len: 4
         Float complex size: 8
         Quantum state vector size: 32
-            0: (4.9497, 4.9497)
-            1: (4.2426, 4.9497)
-            2: (0.7071, 0.7071)
-            3: (-1.4142, 0.7071)
+            0: (0.5078, 0.5078)
+            1: (0.4353, 0.5078)
+            2: (0.0725, 0.0725)
+            3: (-0.1451, 0.0725)
 ```
 
-[Отчет о запуске на машине Polus](https://github.com/Zherdev/quantum/blob/master/adamar/report.pdf)
+[Отчет о запуске на машине IBM Polus](https://github.com/Zherdev/quantum/blob/master/adamar/report.pdf)
 -------
