@@ -42,8 +42,8 @@ Args:
 State vector v:
         Qubits num: 2
         Quantum state vector len: 4
-        Float complex size: 8
-        Quantum state vector size: 32
+        Double complex size: 16
+        Quantum state vector size: 64
             0: (0.4104, 0.4104)
             1: (0.2052, 0.4104)
             2: (0.3078, 0.3078)
@@ -52,8 +52,8 @@ State vector v:
 State vector w:
         Qubits num: 2
         Quantum state vector len: 4
-        Float complex size: 8
-        Quantum state vector size: 32
+        Double complex size: 16
+        Quantum state vector size: 64
             0: (0.5078, 0.5078)
             1: (0.4353, 0.5078)
             2: (0.0725, 0.0725)

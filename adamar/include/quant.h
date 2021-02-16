@@ -10,7 +10,7 @@
 struct quant_state_vector {
     uint64_t n;
     uint64_t len;
-    float complex *elems;
+    double complex *elems;
 };
 
 void quant_state_vector_alloc(struct quant_state_vector *v, uint64_t n);
@@ -23,7 +23,7 @@ void quant_state_vector_print_elems(struct quant_state_vector *v);
 
 void quant_state_vector_free(struct quant_state_vector *v);
 
-typedef float complex quant_matrix[2][2];
+typedef double complex quant_matrix[2][2];
 
 void quant_matrix_init_adamar(quant_matrix u);
 

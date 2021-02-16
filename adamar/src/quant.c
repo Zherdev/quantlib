@@ -11,7 +11,7 @@ void quant_state_vector_alloc(struct quant_state_vector *v, uint64_t n)
 {
     v->n = n;
     v->len = pow(2, n);
-    v->elems = calloc(v->len, sizeof(float complex));
+    v->elems = calloc(v->len, sizeof(double complex));
 }
 
 void quant_state_vector_init_random(struct quant_state_vector *v)
@@ -19,7 +19,7 @@ void quant_state_vector_init_random(struct quant_state_vector *v)
     printf("Random vector initialization started...\n");
 
     const int max_val = 5;
-    float sum = 0;
+    double sum = 0;
 
     #pragma omp parallel
     {
@@ -27,8 +27,8 @@ void quant_state_vector_init_random(struct quant_state_vector *v)
         unsigned int seed = omp_get_thread_num();
         #pragma omp for
         for (uint64_t i = 0; i < v->len; i++) {
-            float re = rand_r(&seed) % max_val;
-            float im = rand_r(&seed) % max_val;
+            double re = rand_r(&seed) % max_val;
+            double im = rand_r(&seed) % max_val;
 
             v->elems[i] = re + im * I;
         }
@@ -36,10 +36,10 @@ void quant_state_vector_init_random(struct quant_state_vector *v)
         // normalization
         #pragma omp for reduction(+ : sum)
         for (uint64_t i = 0; i < v->len; i++) {
-            float complex x = v->elems[i] * conjf(v->elems[i]);
+            double complex x = v->elems[i] * conjf(v->elems[i]);
             sum += crealf(x);
         }
-        float norm = sqrtf(sum);
+        double norm = sqrtf(sum);
         #pragma omp for
         for (uint64_t i = 0; i < v->len; i++) {
             v->elems[i] = v->elems[i] / norm;
@@ -53,9 +53,9 @@ void quant_state_vector_print_info(struct quant_state_vector *v)
 {
     printf("\tQubits num: %lu\n"
            "\tQuantum state vector len: %lu\n"
-           "\tFloat complex size: %lu\n"
+           "\tDouble complex size: %lu\n"
            "\tQuantum state vector size: %lu\n",
-           v->n, v->len, sizeof(float complex), v->len * sizeof(float complex));
+           v->n, v->len, sizeof(double complex), v->len * sizeof(double complex));
 }
 
 void quant_state_vector_print_elems(struct quant_state_vector *v)
@@ -79,7 +79,7 @@ void quant_state_vector_free(struct quant_state_vector *v)
 
 void quant_matrix_init_adamar(quant_matrix u)
 {
-    const float v = 1 / sqrtf(2);
+    const double v = 1 / sqrtf(2);
     u[0][0] = v;
     u[0][1] = v;
     u[1][0] = v;
