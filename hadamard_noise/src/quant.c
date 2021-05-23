@@ -59,7 +59,7 @@ void quant_state_vector_init_random(struct quant_state_vector *v)
     #pragma omp parallel for reduction(+ : local_sum)
     for (uint64_t i = 0; i < len; i++) {
         double complex x = v->elems[i] * conj(v->elems[i]);
-        local_sum += crealf(x);
+        local_sum += creal(x);
     }
 
     double sum = 0;
