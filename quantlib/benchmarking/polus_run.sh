@@ -5,8 +5,8 @@
 
 module load SpectrumMPI
 
-Ns=(25 26 27)
-Ps=(16 32 64)
+Ns=(23 24 25)
+Ps=(1 2 4 8 16 32)
 
 mkdir -p report
 mkdir -p data
@@ -34,7 +34,7 @@ done
 
 # Hadamard^N
 
-cd hadamard
+cd hadamard_n
 make clean && make
 cd ../
 
@@ -45,11 +45,36 @@ do
     for j in ${!Ps[*]}
     do
         P=${Ps[$j]}
-        REPORT_OUT="report/hadamard-$P-$N.out"
-        REPORT_ERR="report/hadamard-$P-$N.err"
+        REPORT_OUT="report/hadamard_n-$P-$N.out"
+        REPORT_ERR="report/hadamard_n-$P-$N.err"
 
-        echo "mpisubmit.pl -p "$P" --stdout "$REPORT_OUT" --stderr "$REPORT_ERR"  hadamard/hadamard -- $N data/$N.bin"
-        mpisubmit.pl -p "$P" --stdout "$REPORT_OUT" --stderr "$REPORT_ERR"  hadamard/hadamard -- $N data/$N.bin
+        echo "mpisubmit.pl -p "$P" --stdout "$REPORT_OUT" --stderr "$REPORT_ERR"  hadamard_n/hadamard_n -- $N data/$N.bin"
+        mpisubmit.pl -p "$P" --stdout "$REPORT_OUT" --stderr "$REPORT_ERR"  hadamard_n/hadamard_n -- $N data/$N.bin
+        while [ ! -f "$REPORT_OUT" ]
+        do
+            sleep 2
+        done
+    done
+done
+
+# CNOT
+
+cd cnot
+make clean && make
+cd ../
+
+for i in ${!Ns[*]}
+do
+    N=${Ns[$i]}
+
+    for j in ${!Ps[*]}
+    do
+        P=${Ps[$j]}
+        REPORT_OUT="report/cnot-$P-$N.out"
+        REPORT_ERR="report/cnot-$P-$N.err"
+
+        echo "mpisubmit.pl -p "$P" --stdout "$REPORT_OUT" --stderr "$REPORT_ERR"  cnot/cnot -- $N data/$N.bin"
+        mpisubmit.pl -p "$P" --stdout "$REPORT_OUT" --stderr "$REPORT_ERR"  cnot/cnot -- $N data/$N.bin
         while [ ! -f "$REPORT_OUT" ]
         do
             sleep 2

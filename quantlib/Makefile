@@ -1,5 +1,8 @@
-LIBDIR  = lib
-TESTDIR = test
+LIBDIR   = lib
+TESTDIR  = test
+CNDOTDIR = cnot
+HADDIR   = hadamard_n
+BENCHDIR = benchmarking
 
 .PHONY: all
 all: quantlib test-build
@@ -8,6 +11,8 @@ all: quantlib test-build
 clean:
 	cd $(LIBDIR) && $(MAKE) clean
 	cd $(TESTDIR) && $(MAKE) clean
+	cd $(BENCHDIR)/$(HADDIR) && $(MAKE) clean
+	cd $(BENCHDIR)/$(CNDOTDIR) && $(MAKE) clean
 
 .PHONY: quantlib
 quantlib:
@@ -24,3 +29,7 @@ test-run-mpiexec: quantlib test-build
 .PHONY: test-run-mpisubmit
 test-run-mpisubmit: quantlib test-build
 	cd $(TESTDIR) && $(MAKE) run-mpisubmit
+
+.PHONY: benchmarking-polus
+benchmarking-polus: quantlib
+	cd $(BENCHDIR) && bash polus_run.sh

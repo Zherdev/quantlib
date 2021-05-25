@@ -8,15 +8,15 @@
 #include <mpi.h>
 
 /*
- * Util for running Hadamard^N transformation for quantlib benchmarking.
+ * Util for running CNOT transformation for quantlib benchmarking.
  *
  * Zherdev, 2021.
  */
 
-static int8_t hadamard_n(uint64_t qubits_num, char *filename, int32_t my_rank);
+static int8_t cnot(uint64_t qubits_num, char *filename, int32_t my_rank);
 
 // Usage:
-// $ generate qubits_num input_filename
+// $ cnot qubits_num input_filename
 int main(int argc, char *argv[])
 {
     MPI_Init(&argc, &argv);
@@ -36,13 +36,13 @@ int main(int argc, char *argv[])
     int comm_size = 0;
     MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
 
-    int8_t err = hadamard_n(qubits_num, input_filename, my_rank);
+    int8_t err = cnot(qubits_num, input_filename, my_rank);
 
     MPI_Finalize();
     return err;
 }
 
-static int8_t hadamard_n(uint64_t qubits_num, char *filename, int32_t my_rank)
+static int8_t cnot(uint64_t qubits_num, char *filename, int32_t my_rank)
 {
     MPI_File fh = MPI_FILE_NULL;
     int8_t err = MPI_File_open(MPI_COMM_WORLD, filename,
@@ -68,7 +68,10 @@ static int8_t hadamard_n(uint64_t qubits_num, char *filename, int32_t my_rank)
     MPI_Barrier(MPI_COMM_WORLD);
     double start = MPI_Wtime();
 
-    err = quant_transform_hadamard_n(&v, &res);
+    const uint64_t control_qubit = 1;
+    const uint64_t target_qubit = 5;
+
+    err = quant_transform_cnot(&v, &res, control_qubit, target_qubit);
     if (!err) {
         double elapsed_local = MPI_Wtime() - start;
         double elapsed_max = 0;

@@ -1,7 +1,7 @@
-TARGET = hadamard
+TARGET = cnot
 
-SOURCE   = hadamard.c
-OBJECT   = hadamard.o
+SOURCE   = cnot.c
+OBJECT   = cnot.o
 LIBDIR   = ../../lib
 INCDIR   := $(LIBDIR)/include
 QUANTLIB := $(wildcard $(LIBDIR)/bin/*.a)

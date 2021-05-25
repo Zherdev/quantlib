@@ -8,9 +8,10 @@ Parallel C library for quantum calculations with MPI support
 * Such common gates as Hadamard, NOT, CNOT, ROT and etc are provided.
 * Transformations with custom matrices are available also.
 * Quantum state vectors can be stored & loaded as binary files.
+* Non-parallel mode is available with one MPI process.
 
-Compile && run tests
------------------------
+Compilation & Testing
+---------------------
 
 ```bash
 $ cd quantlib
@@ -18,8 +19,9 @@ $ make
 $ make test-run-mpiexec
 ```
 
-* Static library in `quantlib/lib/bin/quantlib.a`
-* Headers in `quantlib/lib/include/quantlib.h`
+* Static library in `quantlib/lib/bin/quantlib.a`.
+* Headers in `quantlib/lib/include/quantlib.h`.
+* See `quantlib/Makefile` for additional info.
 
 Examples
 --------
@@ -57,6 +59,15 @@ Notes
 
 * MPI-processes number are expected to be 2^N, N >= 0.
 * N may be equal to zero, so it is possible to run calculations in the non-parallel mode.
+
+Performance
+-----------
+
+Performance was tested on CMC MSU Polus IBM Power 8 high performance cluster.
+
+See `quantlib/benchmarking` for details and benchmarking utils.
+
+![Hadamard^N gate performance](https://github.com/Zherdev/quantum/blob/master/quantlib/benchmarking/hadamard_n.png)
 
 Author
 ------
