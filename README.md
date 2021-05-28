@@ -14,6 +14,7 @@ Compilation & Testing
 ---------------------
 
 ```bash
+$ git clone https://github.com/Zherdev/quantlib.git
 $ cd quantlib
 $ make
 $ make test-run-mpiexec
@@ -67,7 +68,7 @@ Performance was tested on CMC MSU Polus IBM Power 8 high performance cluster.
 
 See `quantlib/benchmarking` for details and benchmarking utils.
 
-![Hadamard^N gate performance](https://github.com/Zherdev/quantum/blob/master/quantlib/benchmarking/hadamard_n.png)
+![Hadamard^N gate performance](https://github.com/Zherdev/quantlib/blob/master/benchmarking/hadamard_n.png)
 
 Author
 ------

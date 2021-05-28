@@ -14,4 +14,4 @@ $ bash polus_run.bash
 
 See MSU Polus HPC run report in `polus_report.pdf`.
 
-![Hadamard^N gate performance](https://github.com/Zherdev/quantum/blob/master/quantlib/benchmarking/hadamard_n.png)
+![Hadamard^N gate performance](https://github.com/Zherdev/quantlib/blob/master/benchmarking/hadamard_n.png)
